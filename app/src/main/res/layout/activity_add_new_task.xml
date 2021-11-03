@@ -8,51 +8,72 @@
 
     <EditText
         android:id="@+id/name_ed"
-        android:layout_width="248dp"
-        android:layout_height="53dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:ems="10"
+        android:shadowRadius="5"
+        android:shadowColor="#BBB0EE"
+        android:background="@drawable/etshape"
         android:inputType="textPersonName"
-        android:hint="Enter Name"
+        android:hint="Task Name"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.12" />
+        app:layout_constraintVertical_bias="0.176" />
 
     <EditText
         android:id="@+id/des_ed"
-        android:layout_width="248dp"
-        android:layout_height="53dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:hint="description"
+        android:background="@drawable/etshape"
+        android:shadowRadius="5"
+        android:shadowColor="#BBB0EE"
+        android:textAlignment="center"
+        android:hint="Task Description"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.308" />
+        app:layout_constraintTop_toBottomOf="@+id/name_ed"
+        app:layout_constraintVertical_bias="0.128" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonS"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="48dp"
+        android:background="@drawable/buttonshape"
+        android:fontFamily="sans-serif-condensed-light"
         android:text="Save"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/des_ed"
+        app:layout_constraintVertical_bias="0.359" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="View"
+        android:layout_width="200dp"
+        android:layout_height="48dp"
+        android:background="@drawable/buttonshape"
+        android:fontFamily="sans-serif-condensed-light"
+        android:text="Next"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonS" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonS"
+        app:layout_constraintVertical_bias="0.165" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

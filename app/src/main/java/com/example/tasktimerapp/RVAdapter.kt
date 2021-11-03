@@ -1,17 +1,13 @@
-package com.example.tasktimerapp.adapter
+package com.example.tasktimerapp
 
 import android.os.SystemClock
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Chronometer
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import com.example.tasktimerapp.R
-import com.example.tasktimerapp.ViewTaskRV
-import com.example.tasktimerapp.room.Task
-import com.example.tasktimerapp.room.TaskDatabase
+import androidx.room.Update
 import kotlinx.android.synthetic.main.item_row.view.*
 
 class RVAdapter (private val activity: ViewTaskRV, private var taskList:List<Task>): RecyclerView.Adapter<RVAdapter.ItemViewHolder>() {
@@ -40,12 +36,11 @@ class RVAdapter (private val activity: ViewTaskRV, private var taskList:List<Tas
 
         val task = taskList[position]
 
-        //from mohammed code
         val countDownTimer = Chronometer(holder.itemView.context)
         countDownTimer.isVisible = false
 
         holder.itemView.apply {
-            taskInfo.text = "${task.name}\n\n ${task.description}\n${task.PauseOff}"
+            taskInfo.text = "${task.name}\n\n ${task.description}\n${task.time}"
             linear.addView(countDownTimer)
             var taskpauseOffset = taskList[position].PauseOff
             //onClick
@@ -55,6 +50,7 @@ class RVAdapter (private val activity: ViewTaskRV, private var taskList:List<Tas
 
                 if(!running && chronometer == null){
                     countDownTimer.isVisible = true
+                    countDownTimer.compoundDrawablePadding
                     countDownTimer.base = SystemClock.elapsedRealtime() - taskpauseOffset
                     countDownTimer.start()
                     chronometer = countDownTimer

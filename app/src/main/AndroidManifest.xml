@@ -13,9 +13,6 @@
             android:name=".TaskWithTime"
             android:exported="true" />
         <activity
-            android:name=".TaskTimer"
-            android:exported="true" />
-        <activity
             android:name=".ViewTaskRV"
             android:exported="true" />
         <activity

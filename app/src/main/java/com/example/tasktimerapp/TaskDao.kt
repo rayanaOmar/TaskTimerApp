@@ -1,9 +1,10 @@
-package com.example.tasktimerapp.room
+package com.example.tasktimerapp
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
+import com.example.tasktimerapp.Task
 
 @Dao
 interface TaskDao {

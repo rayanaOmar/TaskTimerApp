@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<item
+    android:id="@+id/homeId"
+    app:showAsAction="never"
+    android:title="Home"/>
+
+    <item
+        android:id="@+id/addTaskId"
+        app:showAsAction="never"
+        android:title="AddTask"/>
+
+    <item
+        android:id="@+id/viewTaskId"
+        app:showAsAction="never"
+        android:title="ViewTask"/>
+
+    <item
+        android:id="@+id/viewTaskWithTimeId"
+        app:showAsAction="never"
+        android:title="Task With Time"/>
+
+</menu>
