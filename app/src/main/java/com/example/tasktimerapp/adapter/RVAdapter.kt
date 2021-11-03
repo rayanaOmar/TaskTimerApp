@@ -1,0 +1,81 @@
+package com.example.tasktimerapp.adapter
+
+import android.os.SystemClock
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Chronometer
+import androidx.core.view.isVisible
+import androidx.recyclerview.widget.RecyclerView
+import com.example.tasktimerapp.R
+import com.example.tasktimerapp.ViewTaskRV
+import com.example.tasktimerapp.room.Task
+import com.example.tasktimerapp.room.TaskDatabase
+import kotlinx.android.synthetic.main.item_row.view.*
+
+class RVAdapter (private val activity: ViewTaskRV, private var taskList:List<Task>): RecyclerView.Adapter<RVAdapter.ItemViewHolder>() {
+
+    private var chronometer: Chronometer?= null //Like runningTask
+    private var running = false
+    private var pauseOffset: Long = 0
+
+    lateinit var myDBRoom: TaskDatabase
+
+    class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
+        return ItemViewHolder(
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.item_row,
+                parent,
+                false
+            )
+        )
+    }
+
+    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
+        myDBRoom = TaskDatabase.getInstance(activity)
+        myDBRoom.taskDao().getAllTasks()
+
+        val task = taskList[position]
+
+        //from mohammed code
+        val countDownTimer = Chronometer(holder.itemView.context)
+        countDownTimer.isVisible = false
+
+        holder.itemView.apply {
+            taskInfo.text = "${task.name}\n\n ${task.description}\n${task.PauseOff}"
+            linear.addView(countDownTimer)
+            var taskpauseOffset = taskList[position].PauseOff
+            //onClick
+            cardView.setOnClickListener {
+                taskInfo.text = "${task.name}\n \n ${task.description}"
+                //taskList[position].time =chronometer!!.text.toString()
+
+                if(!running && chronometer == null){
+                    countDownTimer.isVisible = true
+                    countDownTimer.base = SystemClock.elapsedRealtime() - taskpauseOffset
+                    countDownTimer.start()
+                    chronometer = countDownTimer
+                    running = true
+
+                }else{
+                    chronometer?.stop()
+                    countDownTimer.isVisible = true
+                    pauseOffset = SystemClock.elapsedRealtime() - chronometer!!.base
+                    task.time = chronometer!!.text.toString()
+                    countDownTimer.start()
+                    chronometer = countDownTimer
+
+                    //Update
+                    myDBRoom.taskDao().updateTimeTask(Task
+                        (task.id, task.name,task.description,pauseOffset,task.time)
+                    )
+
+                }
+            }
+        }
+    }
+    override fun getItemCount() = taskList.size
+}
