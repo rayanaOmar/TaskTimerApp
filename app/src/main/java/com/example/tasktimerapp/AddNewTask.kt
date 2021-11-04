@@ -37,7 +37,6 @@ class AddNewTask : AppCompatActivity() {
             if (userEnterName.isNotEmpty() && userEnterDesc.isNotEmpty()) {
 
                 myDBRoom.taskDao().insertTask(Task(0, userEnterName, userEnterDesc,0))
-
                 Toast.makeText(this, "Data Save Successfully!", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(applicationContext, "Please Enter All  ", Toast.LENGTH_SHORT).show()
@@ -51,7 +50,7 @@ class AddNewTask : AppCompatActivity() {
         }
 
         viewBtn.setOnClickListener {
-            //go to view task fragments
+            //go to view task Activity
             val intent = Intent(this,ViewTaskRV::class.java)
             startActivity(intent)
         }
@@ -94,6 +93,4 @@ class AddNewTask : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
-
-
 }

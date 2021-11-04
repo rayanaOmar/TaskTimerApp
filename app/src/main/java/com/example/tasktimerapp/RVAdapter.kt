@@ -1,6 +1,7 @@
 package com.example.tasktimerapp
 
 import android.os.SystemClock
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,8 +14,7 @@ import kotlinx.android.synthetic.main.item_row.view.*
 class RVAdapter (private val activity: ViewTaskRV, private var taskList:List<Task>): RecyclerView.Adapter<RVAdapter.ItemViewHolder>() {
 
     private var chronometer: Chronometer?= null //Like runningTask
-    private var running = false
-    private var pauseOffset: Long = 0
+    private var oldTask: Task? = null
 
     lateinit var myDBRoom: TaskDatabase
 
@@ -42,37 +42,73 @@ class RVAdapter (private val activity: ViewTaskRV, private var taskList:List<Tas
 
 
         holder.itemView.apply {
+            var running = false
             taskName.text = " \n${task.name}"
             taskDescription.text = "${task.description}\n\n${task.time} "
             linear.addView(countDownTimer)
-            var taskpauseOffset = taskList[position].PauseOff
+
             //onClick
             cardView.setOnClickListener {
                 taskDescription.text = "${task.description}\n "
-                //taskList[position].time =chronometer!!.text.toString()
 
-                if(!running && chronometer == null){
-                    countDownTimer.isVisible = true
-                    countDownTimer.compoundDrawablePadding
-                    countDownTimer.base = SystemClock.elapsedRealtime() - taskpauseOffset
-                    countDownTimer.start()
+                //--------------new soluation
+                running = !running
+                countDownTimer.isVisible = true
+
+                if(chronometer == null){ //
+                    if(running){
+                        countDownTimer.base = SystemClock.elapsedRealtime() - task.PauseOff
+                        countDownTimer.start()
+                    }else{
+                        countDownTimer.stop()
+                        task.PauseOff = SystemClock.elapsedRealtime() - countDownTimer.base
+                        task.time = countDownTimer.text.toString()
+                        //Update
+                        Log.d("MainTest", "onBindViewHolder: $task")
+                        myDBRoom.taskDao().updateTimeTask(Task
+                            (task.id, task.name,task.description,task.PauseOff,task.time)
+                        )
+                    }
                     chronometer = countDownTimer
-                    running = true
-
+                    oldTask = task
                 }else{
-                    chronometer?.stop()
-                    countDownTimer.isVisible = true
-                    pauseOffset = SystemClock.elapsedRealtime() - chronometer!!.base
-                    task.time = chronometer!!.text.toString()
-                    countDownTimer.start()
-                    chronometer = countDownTimer
+                    if(chronometer == countDownTimer){
+                        if(running){
+                            countDownTimer.base = SystemClock.elapsedRealtime() - task.PauseOff
+                            countDownTimer.start()
+                        }else{
+                            countDownTimer.stop()
+                            task.PauseOff = SystemClock.elapsedRealtime() - countDownTimer.base
+                            task.time = countDownTimer.text.toString()
+                            //Update
+                            Log.d("MainTest", "onBindViewHolder1: $task")
+                            myDBRoom.taskDao().updateTimeTask(Task
+                                (task.id, task.name,task.description,task.PauseOff,task.time)
+                            )
+                        }
+                    }else{
+                        if(chronometer == null){
+                            countDownTimer.base = SystemClock.elapsedRealtime() - task.PauseOff
+                            countDownTimer.start()
+                            chronometer = countDownTimer
+                        }else{
+                            chronometer?.stop()
 
-                    //Update
-                    myDBRoom.taskDao().updateTimeTask(Task
-                        (task.id, task.name,task.description,pauseOffset,task.time)
-                    )
+                            //Update
+                            oldTask!!.PauseOff = SystemClock.elapsedRealtime() - chronometer!!.base
+                            oldTask!!.time = chronometer!!.text.toString()
+                            activity.myDBRoom.taskDao().updateTimeTask(oldTask!!)
+                            //-----------------
 
+                            countDownTimer.base = SystemClock.elapsedRealtime() - task.PauseOff
+                            countDownTimer.start()
+                            oldTask = task
+                            chronometer = countDownTimer
+                        }
+                    }
                 }
+
+
             }
         }
     }

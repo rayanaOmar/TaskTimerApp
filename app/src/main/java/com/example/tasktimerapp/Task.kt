@@ -9,6 +9,6 @@ data class Task (
     @PrimaryKey(autoGenerate = true)@ColumnInfo(name="id")val id:Int=0,
     @ColumnInfo(name="Name")val name:String="",
     @ColumnInfo(name="Description")val description:String="",
-    @ColumnInfo(name="PauseOff")val PauseOff: Long = 0, // as a value
+    @ColumnInfo(name="PauseOff") var PauseOff: Long = 0, // as a value
     @ColumnInfo(name="Time")var time:String = "00:00" //as a string
 )

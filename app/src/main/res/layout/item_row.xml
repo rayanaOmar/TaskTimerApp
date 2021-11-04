@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:gravity="center"
-               android:layout_margin="15dp"
+                android:layout_margin="15dp"
                 android:text="TextView" />
 
             <TextView
