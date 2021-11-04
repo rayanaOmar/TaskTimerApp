@@ -12,9 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 
 class TaskWithTime : AppCompatActivity() {
 
-    lateinit var recyclerV: RecyclerView
-    lateinit var taskListTime:List<Task>
-    lateinit var myDBRoom: TaskDatabase
+    private lateinit var recyclerV: RecyclerView
+    private lateinit var taskListTime:List<Task>
+    private lateinit var myDBRoom: TaskDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.Chronometer
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import androidx.room.Update
 import kotlinx.android.synthetic.main.item_row.view.*
 
 class RVAdapter (private val activity: ViewTaskRV, private var taskList:List<Task>): RecyclerView.Adapter<RVAdapter.ItemViewHolder>() {
@@ -51,7 +50,6 @@ class RVAdapter (private val activity: ViewTaskRV, private var taskList:List<Tas
             cardView.setOnClickListener {
                 taskDescription.text = "${task.description}\n "
 
-                //--------------new soluation
                 running = !running
                 countDownTimer.isVisible = true
 
@@ -107,8 +105,6 @@ class RVAdapter (private val activity: ViewTaskRV, private var taskList:List<Tas
                         }
                     }
                 }
-
-
             }
         }
     }

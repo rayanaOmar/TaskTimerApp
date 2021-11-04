@@ -15,8 +15,9 @@ class AddNewTask : AppCompatActivity() {
     lateinit var edDes: EditText
     lateinit var saveBtn: Button
     lateinit var viewBtn: Button
-
+    lateinit var taskList: List<Task>
     lateinit var myDBRoom: TaskDatabase
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_new_task)
@@ -27,6 +28,7 @@ class AddNewTask : AppCompatActivity() {
         viewBtn = findViewById(R.id.buttonView)
 
         myDBRoom = TaskDatabase.getInstance(this)
+        taskList = listOf()
 
         saveBtn.setOnClickListener {
 
@@ -36,7 +38,7 @@ class AddNewTask : AppCompatActivity() {
 
             if (userEnterName.isNotEmpty() && userEnterDesc.isNotEmpty()) {
 
-                myDBRoom.taskDao().insertTask(Task(0, userEnterName, userEnterDesc,0))
+                myDBRoom.taskDao().insertTask(Task(0, userEnterName, userEnterDesc, 0))
                 Toast.makeText(this, "Data Save Successfully!", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(applicationContext, "Please Enter All  ", Toast.LENGTH_SHORT).show()
@@ -51,20 +53,20 @@ class AddNewTask : AppCompatActivity() {
 
         viewBtn.setOnClickListener {
             //go to view task Activity
-            val intent = Intent(this,ViewTaskRV::class.java)
+            val intent = Intent(this, ViewTaskRV::class.java)
             startActivity(intent)
         }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_item,menu)
+        menuInflater.inflate(R.menu.menu_item, menu)
         return super.onCreateOptionsMenu(menu)
 
     }
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
+        when (item.itemId) {
             R.id.homeId -> {
                 val i = Intent(this, MainActivity::class.java)
                 startActivity(i)

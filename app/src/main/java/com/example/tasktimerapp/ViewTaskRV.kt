@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.RecyclerView
 
 class ViewTaskRV : AppCompatActivity() {
 
-    lateinit var recyclerV: RecyclerView
-    lateinit var taskList:List<Task>
+    private lateinit var recyclerV: RecyclerView
+    private lateinit var taskList:List<Task>
     lateinit var myDBRoom: TaskDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,32 +45,30 @@ class ViewTaskRV : AppCompatActivity() {
             R.id.homeId -> {
                 val i = Intent(this, MainActivity::class.java)
                 startActivity(i)
-                Toast.makeText(this, "This is Home Page", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Home Page", Toast.LENGTH_SHORT).show()
 
             }
             R.id.addTaskId -> {
                 val i = Intent(this, AddNewTask::class.java)
                 startActivity(i)
-                Toast.makeText(this, "This is New Task Page", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "New Task Page", Toast.LENGTH_SHORT).show()
 
             }
 
-            R.id.addTaskId -> {
+            R.id.viewTaskId -> {
                 val i = Intent(this, ViewTaskRV::class.java)
                 startActivity(i)
-                Toast.makeText(this, "This is View Tasks Page", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "View Tasks Page", Toast.LENGTH_SHORT).show()
 
             }
 
             R.id.viewTaskWithTimeId -> {
                 val i = Intent(this, TaskWithTime::class.java)
                 startActivity(i)
-                Toast.makeText(this, "This is  Tasks With Timer Page", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Tasks With Timer Page", Toast.LENGTH_SHORT).show()
 
             }
         }
         return super.onOptionsItemSelected(item)
     }
-
-
 }

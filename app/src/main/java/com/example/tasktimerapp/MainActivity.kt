@@ -6,8 +6,8 @@ import android.os.Bundle
 import android.widget.Button
 
 class MainActivity : AppCompatActivity() {
-    lateinit var addBtn: Button
-    lateinit var viewBtn:Button
+    private lateinit var addBtn: Button
+    private lateinit var viewBtn:Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
