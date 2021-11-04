@@ -38,14 +38,17 @@ class RVAdapter (private val activity: ViewTaskRV, private var taskList:List<Tas
 
         val countDownTimer = Chronometer(holder.itemView.context)
         countDownTimer.isVisible = false
+        countDownTimer.gravity= 17
+
 
         holder.itemView.apply {
-            taskInfo.text = "${task.name}\n\n ${task.description}\n${task.time}"
+            taskName.text = " \n${task.name}"
+            taskDescription.text = "${task.description}\n\n${task.time} "
             linear.addView(countDownTimer)
             var taskpauseOffset = taskList[position].PauseOff
             //onClick
             cardView.setOnClickListener {
-                taskInfo.text = "${task.name}\n \n ${task.description}"
+                taskDescription.text = "${task.description}\n "
                 //taskList[position].time =chronometer!!.text.toString()
 
                 if(!running && chronometer == null){
