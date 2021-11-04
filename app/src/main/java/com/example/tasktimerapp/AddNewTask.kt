@@ -3,11 +3,11 @@ package com.example.tasktimerapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import com.example.tasktimerapp.room.Task
-import com.example.tasktimerapp.room.TaskDatabase
 
 class AddNewTask : AppCompatActivity() {
 
@@ -56,4 +56,44 @@ class AddNewTask : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_item,menu)
+        return super.onCreateOptionsMenu(menu)
+
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.homeId -> {
+                val i = Intent(this, MainActivity::class.java)
+                startActivity(i)
+                Toast.makeText(this, "This is Home Page", Toast.LENGTH_SHORT).show()
+
+            }
+            R.id.addTaskId -> {
+                val i = Intent(this, AddNewTask::class.java)
+                startActivity(i)
+                Toast.makeText(this, "This is New Task Page", Toast.LENGTH_SHORT).show()
+
+            }
+
+            R.id.viewTaskId -> {
+                val i = Intent(this, ViewTaskRV::class.java)
+                startActivity(i)
+                Toast.makeText(this, "This is View Tasks Page", Toast.LENGTH_SHORT).show()
+
+            }
+            R.id.viewTaskWithTimeId -> {
+                val i = Intent(this, TaskWithTime::class.java)
+                startActivity(i)
+                Toast.makeText(this, "This is  Tasks With Timer Page", Toast.LENGTH_SHORT).show()
+
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+
 }

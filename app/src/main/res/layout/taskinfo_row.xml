@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -30,23 +29,12 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/taskName"
-                android:textSize="20dp"
+                android:id="@+id/tvCardTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
                 android:gravity="center"
-               android:layout_margin="15dp"
+                android:layout_marginVertical="32dp"
                 android:text="TextView" />
-
-            <TextView
-                android:id="@+id/taskDescription"
-                android:textSize="15dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Text" />
-
         </LinearLayout>
 
 

@@ -1,4 +1,4 @@
-package com.example.tasktimerapp.room
+package com.example.tasktimerapp
 
 import android.content.Context
 import androidx.room.Database
@@ -10,14 +10,14 @@ abstract class TaskDatabase: RoomDatabase() {
 
     companion object{
         private var instance: TaskDatabase?=null
-        fun getInstance(ctx: Context): TaskDatabase{
-            if(instance!=null)
+        fun getInstance(ctx: Context): TaskDatabase {
+            if(instance !=null)
             {
                 return  instance as TaskDatabase
             }
-            instance= Room.databaseBuilder(ctx,TaskDatabase::class.java,"someName").run { allowMainThreadQueries() }.build()
+            instance = Room.databaseBuilder(ctx, TaskDatabase::class.java,"someName").run { allowMainThreadQueries() }.build()
             return instance as TaskDatabase
         }
     }
-    abstract fun taskDao():TaskDao
+    abstract fun taskDao(): TaskDao
 }
